@@ -6,14 +6,13 @@ working on ephys data analysis rotation proj.
 
 Recordings from rats performing PWM task with 32 tetrode, 128 channel recordings targeting mPFC.
 
-**fill in more here eventually**
 
 ----------------------------------
 # TODO
-- update all paths to go from Brody_Lab_Ephys --> jbreda_kilosort
-  fork into brody lab repo
+- save out mask in kilosort_preprocess to document how much is getting set to 0
+- write a mega-fx to run all together
 - in main_kilosort_forcluster_parallel_wrapper, remove temp_wh.dat to save space after kilosort has run
-- Post-processing
+
 
 ------------------------------------
 
@@ -548,4 +547,4 @@ kilosort_ops_sweeps(Thresholds, Lams, AUCs)
 
 - bdata integration
 - behavior alignment
-- PSTHs/spike trig avgs/etc. 
+- PSTHs/spike trig avgs/etc.
