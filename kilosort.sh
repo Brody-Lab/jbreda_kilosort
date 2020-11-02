@@ -6,14 +6,14 @@
 #SBATCH --gres=gpu:1
 #SBATCH --mem=50000          # 50 GB RAM 
 #SBATCH -t 60                # time (minutes)
-#SBATCH -o /scratch/gpfs/jbreda/ephys/kilosort/logs/output_%j.out
-#SBATCH -e /scratch/gpfs/jbreda/ephys/kilosort/logs/error_%j.err
+#SBATCH -o /scratch/gpfs/jbreda/ephys/kilosort/W122/batch_test_logs/output_%j.out
+#SBATCH -e /scratch/gpfs/jbreda/ephys/kilosort/W122/batch_test_logs/error_%j.err
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=jbreda@princeton.edu
 
 
 # where the .bin file is
-input_path="/scratch/gpfs/jbreda/ephys/kilosort/data_sdb_20190724_193007_fromSD_firstbundle_T5_W10000_forkilosort" 
+input_path="/scratch/gpfs/jbreda/ephys/kilosort/W122/batch_test" 
 
 # where the Brody_Lab_Ephys repo is
 repo_path="/scratch/gpfs/jbreda/ephys/kilosort/jbreda_kilosort"
