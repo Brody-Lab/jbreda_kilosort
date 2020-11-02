@@ -4,7 +4,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --ntasks-per-socket=1
 #SBATCH --gres=gpu:1
-#SBATCH --mem=20000          # 20 GB RAM 
+#SBATCH --mem=50000          # 50 GB RAM 
 #SBATCH -t 60                # time (minutes)
 #SBATCH -o /scratch/gpfs/jbreda/ephys/kilosort/logs/output_%j.out
 #SBATCH -e /scratch/gpfs/jbreda/ephys/kilosort/logs/error_%j.err
@@ -16,10 +16,10 @@
 input_path="/scratch/gpfs/jbreda/ephys/kilosort/data_sdb_20190724_193007_fromSD_firstbundle_T5_W10000_forkilosort" 
 
 # where the Brody_Lab_Ephys repo is
-repo_path="/scratch/gpfs/jbreda/ephys/kilosort/Brody_Lab_Ephys"
+repo_path="/scratch/gpfs/jbreda/ephys/kilosort/jbreda_kilosort"
 
 # where the config and channel map info are (inputs to main_kilosort fx)
-config_path="/scratch/gpfs/jbreda/ephys/kilosort/Brody_Lab_Ephys/utils/cluster_kilosort"
+config_path="/scratch/gpfs/jbreda/ephys/kilosort/jbreda_kilosort/utils/cluster_kilosort"
  
 cd $config_path
 
