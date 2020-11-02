@@ -42,7 +42,7 @@ password
 
 ```
 cd /jukebox/scratch/*your folder*/ephys/*folder with raw data*
-git clone https://github.com/jess-breda/jbreda_kilosort
+git clone https://github.com/Brody-Lab/jbreda_kilosort
 ```
 
 **5.** Open `datrec_to_bin.sh` & edit `input_path` to be folder with raw data. Additionally, adjust paths in the header for job output/errors & email for job updates. If you are working with .mda files see step **7**.
@@ -108,7 +108,7 @@ To break up conversion process you can run:
 
 ```
 cd /jukebox/scratch/*your folder*/ephys/*folder with raw data*/*jobid_binfilesforkilosort2*
-git clone https://github.com/jess-breda/jbreda_kilosort
+git clone https://github.com/Brody-Lab/jbreda_kilosort
 ```
 
 - Open `kilosort_preprocess_to_sort.sh` & edit `input_path` such that it is the directory containing .bin files to process. Edit the `repo_path` so that it points to this repo. Additionally, adjust paths in the header for job output/errors & email for job updates.
@@ -144,7 +144,7 @@ scp -r yourid@spock.princeton.edu:/jukebox/scratch/foldertotransfer yourid@tiger
 **4.** Clone repo to this directory
 ```
 cd /scratch/gpfs/jbreda/ephys/kilosort
-git clone https://github.com/jess-breda/jbreda_kilosort`
+git clone https://github.com/Brody-Lab/jbreda_kilosort`
 ```
 
 **5.** Initiate the kilosort submodule (pulls their most recent commit)
@@ -355,7 +355,7 @@ Steps modified from [here](https://brodylabwiki.princeton.edu/wiki/index.php?tit
 
 ```
 cd /jukebox/scratch/*your folder*/ephys/*folder for raw data*
-git clone https://github.com/jess-breda/jbreda_kilosort
+git clone https://github.com/Brody-Lab/jbreda_kilosort
 ```
 
 Then, copy the trodes config file up out of the repo and into the folder so it is on the same level as the data (this is automatically done if running `kilosort_slurm.sh`). It's okay if it is already there, it will be copied over.
@@ -503,7 +503,7 @@ Comment out:
 
 **4.** Function notes:
 
-`main_kilosort_fx.m` takes `main_kilosort` script from [Kilosort](https://github.com/jess-breda/jbreda_kilosort/blob/master/utils/cluster_kilosort/main_kilosort_forcluster_wrapper.m) and turns into function. Takes a path to binary file as input. Assumes that .bin file, config file and channel map are in a directory by themselves. Will populate that directory with kilosort/phy output
+`main_kilosort_fx.m` takes `main_kilosort` script from [Kilosort](https://github.com/Brody-Lab/jbreda_kilosort/blob/master/utils/cluster_kilosort/main_kilosort_forcluster_wrapper.m) and turns into function. Takes a path to binary file as input. Assumes that .bin file, config file and channel map are in a directory by themselves. Will populate that directory with kilosort/phy output
 
 - Channel map: `KSchanMap_thousands.mat`
 - Config file: `StandardConfig_JB_20200803.m`
