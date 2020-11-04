@@ -87,4 +87,7 @@ fprintf('Saving final results in rez2  \n')
 fname = fullfile(rootZ, 'rez2.mat');
 save(fname, 'rez', '-v7.3');
 
+% remove temp_wh file because it's huge and we don't need it
+delete *.dat
+
 end
