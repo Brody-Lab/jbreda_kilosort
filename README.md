@@ -328,11 +328,12 @@ sbatch --array=0-120 kilosort_parallel.sh
 - **returns** in `input_base_path + bin_folders_arr[array_ID]` where `array_ID = {0,1,..X}`, outputs for [Phy Template GUI](https://github.com/cortex-lab/phy) are generated
 
 optional: git add, commit, push here to document jobid & file(s) sorted
-``
-to remove dat files (like temp_wh.dat)
-`rm ./*/*.dat`
 
 **9.** Move sorted files & logs back to spock/jukebox for manual sorting in Phy (assumes you store your logs like I do, see **step 2**)
+
+I like to remove the `temp_wh.dat` files before I do this becasue they take up a ton of space and you don't need them for Phy
+`rm ./*/*.dat`
+
 ```
 tmux new -s DescriptiveSessionName
 scp -r yourid@tigergpu.princeton.edu:/scratch/gpfs/jbreda/ephys/kilosort/*Rat_Name* yourid@spock.princeton.edu:/jukebox/whereyoustore/storedfiles
