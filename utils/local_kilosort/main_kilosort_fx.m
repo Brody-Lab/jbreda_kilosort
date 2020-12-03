@@ -2,8 +2,8 @@ function main_kilosort_fx(pathtobin, pathtoconfig)
 
 %% you need to change most of the paths in this block
 
-addpath(genpath('C:\Users\jbred\Github\Brody_Lab_Ephys\utils\Kilosort2')) % path to kilosort folder
-addpath('C:\Users\jbred\Github\Brody_Lab_Ephys\utils\npy-matlab-master') % for converting to Phy
+addpath(genpath('C:\Users\brodylab\Documents\GitHub\jbreda_kilosort\utils\Kilosort2')) % path to kilosort folder
+addpath('C:\Users\brodylab\Documents\GitHub\jbreda_kilosort\utils\npy-matlab-master') % for converting to Phy
 rootZ = pathtobin; % the raw data binary file is in this folder
 rootH = rootZ; % path to temporary binary file (same size as data, should be on fast SSD)
 pathToYourConfigFile = pathtoconfig; % take from Github folder and put it somewhere else (together with the main_file)
@@ -13,7 +13,7 @@ chanMapFile = 'KSchanMap_thousands.mat';
 ops.trange = [250 Inf]; % time range to sort (in seconds)
 ops.NchanTOT    = 32; % total number of channels in your recording
 
-run(fullfile(pathToYourConfigFile, 'StandardConfig_8tetrodes_3_2_2_test.m'))
+run(fullfile(pathToYourConfigFile, 'StandardConfig_JB_20201203.m'))
 ops.fproc       = fullfile(rootH, 'temp_wh.dat'); % proc file on a fast SSD
 ops.chanMap = fullfile(pathToYourConfigFile, chanMapFile);
 
