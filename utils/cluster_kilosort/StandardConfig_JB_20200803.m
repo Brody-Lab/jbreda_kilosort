@@ -32,7 +32,7 @@ ops.momentum = [20 400];
 ops.sigmaMask = 30; 
 
 % threshold crossings for pre-clustering (in PCA projection space)
-ops.ThPre = 8; 
+ops.ThPre = 4; 
 
 % noise
 % ops.criterionNoiseChannels = 0.01
