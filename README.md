@@ -159,8 +159,10 @@ git submodule update
 ```
 cd /utils/Kilosort2/CUDA
 module purge
-module load matlab2018b
-mexGPUall.m
+module load matlab/2018b
+matlab
+---matlab opens---
+run mexGPUall.m
 ```
 
 **7.** Edit weird spkTh bug
