@@ -1,28 +1,18 @@
 
-# Ephys
-working on ephys data analysis rotation proj.
+# Introduction
 
-# Data acquisition
-
-Recordings from rats performing PWM task with 32 tetrode, 128 channel recordings targeting mPFC.
-
-
-----------------------------------
-# TODO
-- save out mask in kilosort_preprocess to document how much is getting set to 0
-- write a mega-fx to run all together
-- in main_kilosort_forcluster_parallel_wrapper, remove temp_wh.dat to save space after kilosort has run
-
+Repository of a data processing pipeline for spike sorting electrophysiological data collected from the mPFC cortex with bluetooth, wireless 32 tetrode 128 channel recordings. Spike sorting is perfomred using `Kilosort2` with specific adjustments for tetrodes and increase noise due to bluetooth recording methods. This can be run on the Princeton Neuroscience slurm CPU cluster or on the Princeon Computing slurm GPU cluster for increased speed.
 
 ------------------------------------
-
-# Spike Sorting: Cluster
+# Directions
 
 ## Pre-processing
 
-### Spock
+### Spock (CPU cluster)
 ---
 #### .rec, .dat, .mda --> .bin
+
+Follow the steps below to convert various ephys file types to a `.bin` file thats required by `Kilosort`
 
 **1.** Sign into spock
 ```
@@ -34,11 +24,11 @@ password
 ```
 /jukebox/scratch/*your folder*/ephys/*folder for raw data*
 ```
-- **note:** you will need to get permission access to scratch from pnihelp via Chuck
+- **note:** you will need to get permission access to scratch from pnihelp
 
 **3.** Move files you want to process into `/jukebox/scratch/*your folder*/ephys/*folder for raw data*` (**do this on globus!**)
 
-**4.** Clone jbreda_kilosort git hub repo to your scratch folder
+**4.** Clone `jbreda_kilosort` git hub repo to your scratch folder
 
 ```
 cd /jukebox/scratch/*your folder*/ephys/*folder with raw data*
@@ -57,7 +47,7 @@ input_path="/jukebox/scratch/*your folder*/ephys/*folder with raw data*"
 ```
 
 slurm notes:
-- 1. this is set to run on a Brody lab partition, remove the --partition line if this does not apply to you
+- 1. this is set to run on a Brody lab partition, remove the `--partition` line if this does not apply to you
 - 2. rather than running on slurm via sbatch (step 7 below), if the job is small enough, you can allocate a node instead:
 ```
 tmux new -s DescriptiveSessionName
@@ -67,7 +57,7 @@ salloc -p Brody -t 11:00:00 -c 11 srun -J <DescriptiveJobName> -pty bash
   - To exit screen: `Ctrl` + `b` + `d` See [Tmux cheatsheet](https://tmuxcheatsheet.com/) for more info
 
 
-**6.** Run `datrec_to_bin.sh` to convert any .dat, .rec files --> .mda files --> .bin bundles for kilosort
+**6.** Run `datrec_to_bin.sh` to convert any `.dat` or `.rec` files --> `.mda` files --> `.bin` bundles for kilosort
 
 ```
 cd /jukebox/scratch/*your folder*/ephys/*folder with raw data*/jbreda_kilosort
@@ -75,23 +65,24 @@ sbatch datrec_to_bin.sh
 ```
 
 **Function highlights:**
-- cds into input_path and makes an array of file names with .rec or .dat extension
-- Loops over file names and passes each into `pipeline_fork2` to create .mda files
-  - this function converts .dat and .rec files into .mda files
-- in input_path with new .mda folders, passes them into `kilosortpipelineforcluster.m` along with the repo name and jobid
-  - This function adds all needed paths & cds into correct directory before passing .mda folders into `tetrode_32_mdatobin_forcluster.m`
-  - `tetrode_32_mdatobin_forcluster.m` takes directory of .mda folders, makes a new directory with jobid appended and converts each recording session into .bin files split into 4 groups of 8 tetrodes for each session
+- cds into input_path and makes an array of file names with `.rec` or `.dat` extension
+- Loops over file names and passes each into `pipeline_fork2` to create `.mda` files
+- in input_path with new `.mda` folders, passes them into `kilosortpipelineforcluster.m` along with the repo name and jobid
+  - This function adds all needed paths & cds into correct directory before passing `.mda` folders into `tetrode_32_mdatobin_forcluster.m`
+  - `tetrode_32_mdatobin_forcluster.m` takes directory of `.mda` folders, makes a new directory with jobid appended and converts each recording session into `.bin` files split into 4 groups of 8 tetrodes for each session
 
 - (optional) link your working repo to this directory. Git add, commit & push `kilosort_slurm.sh` with job ID for your records to document what input was for the job
 
-**7.** OPTIONAL .dat and .rec --> .mda or .mda --> .bin bundles
+**7.** OPTIONAL `.dat` and `.rec` --> `.mda` or `.mda` --> `.bin` bundles
 
-To break up conversion process you can run:
+To break up conversion process, or if you already have `.mda.` you can run:
 
 `datrec_to_mda.sh` and `mda_to_bin.sh` instead once header & `input_path` are changed
 
 ---
 #### preprocess .bin
+
+Follow the steps below to preprocess the `.bin` phys files so that you can have successful spike sorting in Kilosort. This applies a highpassfilter to the data, and removes large amplitude noise assoicated with movements.
 
 **1.** Run `kilosort_preprocess_to_sort.sh` to preprocess .bin files before passing into kilosort
 
@@ -111,7 +102,7 @@ cd /jukebox/scratch/*your folder*/ephys/*folder with raw data*/*jobid_binfilesfo
 git clone https://github.com/Brody-Lab/jbreda_kilosort
 ```
 
-- Open `kilosort_preprocess_to_sort.sh` & edit `input_path` such that it is the directory containing .bin files to process. Edit the `repo_path` so that it points to this repo. Additionally, adjust paths in the header for job output/errors & email for job updates.
+- Open `kilosort_preprocess_to_sort.sh` & edit `input_path` such that it is the directory containing `.bin` files to process. Edit the `repo_path` so that it points to this repo. Additionally, adjust paths in the header for job output/errors & email for job updates.
 
 - Run
 ```
@@ -119,9 +110,9 @@ cd repo_path
 sbatch kilosort_preprocess_to_sort.sh
 ```
 
-## Kilosort 2
+## Spike Sorting
 ----
-### tigerGPU
+### tigerGPU Cluster
 ---
 #### Single File
 
