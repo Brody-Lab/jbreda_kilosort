@@ -1,6 +1,6 @@
 ## Directions
 ---
-Step by step directions on how to run functions in this repository for spike sorting tetrode data in `kilosort2`. For more detailed function documentation see here
+Step by step directions on how to run functions in this repository for spike sorting tetrode data in `kilosort2`. For more detailed function documentation see [here](https://github.com/Brody-Lab/jbreda_kilosort/blob/master/Docs.md).
 
 ## Pre-processing
 ---
